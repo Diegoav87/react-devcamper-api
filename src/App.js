@@ -53,7 +53,11 @@ function App() {
             <Bootcamps />
           </PrivateRoute>
         } />
-        <Route exact path="/bootcamps/:id" element={<Bootcamp />} />
+        <Route exact path="/bootcamps/:id" element={
+          <PrivateRoute>
+            <Bootcamp />
+          </PrivateRoute>
+        } />
       </Routes>
     </div>
   );
