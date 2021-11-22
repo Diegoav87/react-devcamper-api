@@ -1,5 +1,7 @@
 import React from 'react'
 
+import { Link } from 'react-router-dom'
+
 const Bootcamp = ({ bootcamp }) => {
 
     return (
@@ -10,12 +12,7 @@ const Bootcamp = ({ bootcamp }) => {
                 </div>
                 <div className="col-md-8">
                     <div className="card-body">
-                        <h5 className="card-title">
-                            <a href="bootcamp.html"
-                            >{bootcamp.name}
-                                <span className="float-right badge badge-success"
-                                >{bootcamp.average_rating}</span
-                                ></a>
+                        <h5 className="card-title"><Link to={`/bootcamps/${bootcamp.id}`}>{bootcamp.name}</Link><span className="float-right badge badge-success">{bootcamp.average_rating}</span>
                         </h5>
                         <span className="badge badge-dark mb-2">Boston, MA</span>
                         <p className="card-text">
