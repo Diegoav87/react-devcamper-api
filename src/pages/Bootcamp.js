@@ -42,24 +42,29 @@ const Bootcamp = () => {
 
                             <p>{bootcamp.description}</p>
 
-                            <p className="lead mb-4">Average Course Cost: <span className="text-primary">${bootcamp.average_cost}</span></p>
-
-                            {bootcamp.courses.map(course => {
-                                return (
-                                    <div className="card mb-3">
-                                        <h5 className="card-header bg-primary text-white">{course.title}</h5>
-                                        <div className="card-body">
-                                            <h5 className="card-title">Duration: {course.weeks}</h5>
-                                            <p className="card-text">{course.description}</p>
-                                            <ul className="list-group mb-3">
-                                                <li className="list-group-item">Cost: ${course.tuition} USD</li>
-                                                <li className="list-group-item">Skill Required: {course.minimum_skill}</li>
-                                                <li className="list-group-item">Scholarship Available: {course.scolarship_available ? (<i className="fas fa-check text-success"></i>) : (<i className="fas fa-times text-danger"></i>)}</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                )
-                            })}
+                            {bootcamp.courses.length > 0 ? (
+                                <React.Fragment>
+                                    <p className="lead mb-4">Average Course Cost: <span className="text-primary">${bootcamp.average_cost}</span></p>
+                                    {bootcamp.courses.map(course => {
+                                        return (
+                                            <div className="card mb-3">
+                                                <h5 className="card-header bg-primary text-white">{course.title}</h5>
+                                                <div className="card-body">
+                                                    <h5 className="card-title">Duration: {course.weeks}</h5>
+                                                    <p className="card-text">{course.description}</p>
+                                                    <ul className="list-group mb-3">
+                                                        <li className="list-group-item">Cost: ${course.tuition} USD</li>
+                                                        <li className="list-group-item">Skill Required: {course.minimum_skill}</li>
+                                                        <li className="list-group-item">Scholarship Available: {course.scolarship_available ? (<i className="fas fa-check text-success"></i>) : (<i className="fas fa-times text-danger"></i>)}</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        )
+                                    })}
+                                </React.Fragment>
+                            ) : (
+                                <p className="lead mb-4">This bootcamp has no courses yet.</p>
+                            )}
 
                         </div>
 

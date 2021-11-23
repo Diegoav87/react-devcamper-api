@@ -37,9 +37,9 @@ const Navbar = () => {
                                         <i class="fas fa-user"></i> Account
                                     </a>
                                     <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="manage-bootcamp.html"
-                                        >Manage Bootcamp</a
-                                        >
+                                        <Link to="/manage-bootcamp" className="dropdown-item">
+                                            Manage Bootcamp
+                                        </Link>
                                         <a class="dropdown-item" href="manage-reviews.html"
                                         >Manage Reviews</a
                                         >

@@ -13,6 +13,8 @@ import Register from './pages/Register';
 import Login from './pages/Login';
 import Bootcamps from './pages/Bootcamps';
 import Bootcamp from './pages/Bootcamp';
+import ManageBootcamp from "./pages/ManageBootcamp";
+import AddBootcamp from "./pages/AddBootcamp";
 import Spinner from "./components/Spinner";
 
 import { ToastContainer } from "react-toastify";
@@ -56,6 +58,16 @@ function App() {
         <Route exact path="/bootcamps/:id" element={
           <PrivateRoute>
             <Bootcamp />
+          </PrivateRoute>
+        } />
+        <Route exact path="/manage-bootcamp" element={
+          <PrivateRoute>
+            <ManageBootcamp />
+          </PrivateRoute>
+        } />
+        <Route exact path="/add-bootcamp" element={
+          <PrivateRoute>
+            <AddBootcamp />
           </PrivateRoute>
         } />
       </Routes>
