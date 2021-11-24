@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react'
 import Navbar from '../components/Navbar';
 import Spinner from '../components/Spinner';
 
+import defaultPic from "../assets/img/default_bootcamp.jpg";
+
 import axiosInstance from '../helpers/axios';
 import { useParams } from 'react-router';
-
-import img1 from '../assets/img/image_1.jpg';
 
 const Bootcamp = () => {
     const { id } = useParams();
@@ -70,7 +70,7 @@ const Bootcamp = () => {
 
                         <div className="col-md-4">
 
-                            <img src={`http://127.0.0.1:8000${bootcamp.photo}`} className="img-thumbnail" alt="bootcamp-photo" />
+                            <img src={bootcamp.photo ? `http://127.0.0.1:8000${bootcamp.photo}` : defaultPic} className="img-thumbnail" alt="bootcamp-photo" />
 
                             <h1 className="text-center my-4"><span className="badge badge-secondary badge-success rounded-circle p-3">{bootcamp.average_rating}</span> Rating</h1>
 

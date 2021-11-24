@@ -25,37 +25,37 @@ const Navbar = () => {
 
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                         {auth.user ? (
-                            <ul class="navbar-nav ml-auto">
-                                <li class="nav-item dropdown">
+                            <ul className="navbar-nav ml-auto">
+                                <li className="nav-item dropdown">
                                     <a
-                                        class="nav-link dropdown-toggle"
+                                        className="nav-link dropdown-toggle"
                                         href="#"
                                         id="navbarDropdown"
                                         role="button"
                                         data-toggle="dropdown"
                                     >
-                                        <i class="fas fa-user"></i> Account
+                                        <i className="fas fa-user"></i> Account
                                     </a>
-                                    <div class="dropdown-menu">
+                                    <div className="dropdown-menu">
                                         <Link to="/manage-bootcamp" className="dropdown-item">
                                             Manage Bootcamp
                                         </Link>
-                                        <a class="dropdown-item" href="manage-reviews.html"
+                                        <a className="dropdown-item" href="manage-reviews.html"
                                         >Manage Reviews</a
                                         >
-                                        <a class="dropdown-item" href="manage-account.html"
+                                        <a className="dropdown-item" href="manage-account.html"
                                         >Manage Account</a
                                         >
-                                        <div class="dropdown-divider"></div>
+                                        <div className="dropdown-divider"></div>
                                         <Link to="/logout" className="dropdown-item">
-                                            <i class="fas fa-sign-out-alt"></i> Logout
+                                            <i className="fas fa-sign-out-alt"></i> Logout
                                         </Link>
                                     </div>
                                 </li>
-                                <li class="nav-item d-none d-sm-block">
+                                <li className="nav-item d-none d-sm-block">
                                     <div className="nav-link">|</div>
                                 </li>
-                                <li class="nav-item">
+                                <li className="nav-item">
                                     <Link to="/bootcamps" className="nav-link">
                                         Browse Bootcamps
                                     </Link>

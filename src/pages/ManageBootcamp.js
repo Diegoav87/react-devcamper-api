@@ -7,10 +7,12 @@ import { Link } from 'react-router-dom';
 
 import { toast } from 'react-toastify';
 import axiosInstance from '../helpers/axios';
+import { fileAxios } from '../helpers/axios';
 
 const ManageBootcamp = () => {
     const [bootcamp, setBootcamp] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [bootcampPhoto, setBootcampPhoto] = useState(null);
 
     const getBootcamp = () => {
         axiosInstance
@@ -49,6 +51,44 @@ const ManageBootcamp = () => {
             })
     }
 
+    const selectPhoto = (e) => {
+        const selectedFile = e.target.files[0];
+        const fileSize = Math.round(selectedFile.size / 1024);
+
+        if (fileSize > 5000) {
+            toast.error("Max file size is 5mb");
+            return;
+        }
+
+        setBootcampPhoto(selectedFile);
+
+    }
+
+    const sendPhoto = (e) => {
+        e.preventDefault();
+
+        if (bootcampPhoto) {
+            const data = new FormData();
+            data.append("image", bootcampPhoto);
+
+            fileAxios
+                .put(`bootcamps/upload-photo/${bootcamp.id}/`, data)
+                .then(res => {
+                    console.log(res.data);
+                    toast.success("Image uploaded successfully");
+                    getBootcamp();
+                })
+                .catch(err => {
+                    console.log(err.response);
+                    toast.error("Something went wrong")
+                })
+        } else {
+            toast.error("You have not selected a photo");
+        }
+
+
+    }
+
     return (
         <div>
             <Navbar />
@@ -65,21 +105,21 @@ const ManageBootcamp = () => {
                                             <div className="form-group">
                                                 <div className="custom-file">
                                                     <input
+                                                        onChange={selectPhoto}
                                                         type="file"
                                                         name="photo"
                                                         className="custom-file-input"
                                                         id="photo"
                                                     />
                                                     <label className="custom-file-label" for="photo"
-                                                    >Add Bootcamp Image</label
+                                                    >{bootcampPhoto ? bootcampPhoto.name : "Add Bootcamp Image"}</label
                                                     >
                                                 </div>
                                             </div>
-                                            <input type="submit" className="btn btn-light btn-block" value="Upload Image" />
+                                            <input onClick={sendPhoto} type="submit" className="btn btn-light btn-block" value="Upload Image" />
                                         </form>
-                                        <a href="add-bootcamp.html" className="btn btn-primary btn-block"
-                                        >Edit Bootcamp Details</a
-                                        >
+                                        <Link to="/add-bootcamp" state={{ editing: true, bootcamp: bootcamp }} className="btn btn-primary btn-block"
+                                        >Edit Bootcamp Details</Link>
                                         <a href="manage-courses.html" className="btn btn-secondary btn-block"
                                         >Manage Courses</a
                                         >
@@ -110,7 +150,7 @@ const ManageBootcamp = () => {
                 </div>
             </section >
 
-            <div className="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div className="modal fade" id="exampleModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div className="modal-dialog" role="document">
                     <div className="modal-content">
                         <div className="modal-header">
@@ -124,7 +164,7 @@ const ManageBootcamp = () => {
                         </div>
                         <div className="modal-footer">
                             <button type="button" className="btn btn-secondary" data-dismiss="modal">Keep Bootcamp</button>
-                            <button onClick={deleteBootcamp} type="button" className="btn btn-primary">Delete bootcamp</button>
+                            <button onClick={deleteBootcamp} data-dismiss="modal" type="button" className="btn btn-primary">Delete bootcamp</button>
                         </div>
                     </div>
                 </div>

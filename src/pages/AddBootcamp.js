@@ -6,12 +6,34 @@ import axiosInstance from '../helpers/axios';
 import { toast } from 'react-toastify';
 
 import { useNavigate } from 'react-router';
+import { useLocation } from 'react-router';
 
 const AddBootcamp = () => {
+    const location = useLocation();
+    let editing = false;
+    let bootcamp = null;
+
+    if (location.state) {
+        editing = location.state.editing;
+        bootcamp = location.state.bootcamp;
+    }
+
     const navigate = useNavigate();
     const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
 
-    const [formData, setFormData] = useState({
+    const bootcampData = editing ? {
+        name: bootcamp.name,
+        address: "",
+        phone: bootcamp.phone,
+        email: bootcamp.email,
+        website: bootcamp.website,
+        description: bootcamp.description,
+        careers: bootcamp.careers.map(career => career.name),
+        housing: bootcamp.housing,
+        job_assistance: bootcamp.job_assistance,
+        job_guarantee: bootcamp.job_guarantee,
+        accept_gi: bootcamp.accept_gi
+    } : {
         name: "",
         address: "",
         phone: "",
@@ -23,7 +45,9 @@ const AddBootcamp = () => {
         job_assistance: false,
         job_guarantee: false,
         accept_gi: false
-    })
+    }
+
+    const [formData, setFormData] = useState(bootcampData);
 
     const bootcampFormSchema = yup.object().shape({
         name: yup.string().max(255, "Name can not be longer than 255 characters").required("Name is required"),
@@ -55,25 +79,52 @@ const AddBootcamp = () => {
     const submitBootcamp = (e) => {
         e.preventDefault();
 
+        const url = editing ? `bootcamps/update-bootcamp/${bootcamp.id}/` : "bootcamps/create-bootcamp/";
+
         bootcampFormSchema
             .validate(formData)
             .then(valid => {
                 if (valid) {
-                    axiosInstance
-                        .post("bootcamps/create-bootcamp/", formData)
-                        .then(res => {
-                            console.log(res.data);
-                            toast.success("Bootcamp created");
-                            navigate("/manage-bootcamp");
-                        })
-                        .catch(err => {
-                            console.log(err.response);
-                            Object.keys(err.response?.data).forEach(key => {
-                                err.response.data[key].forEach(error => {
-                                    toast.error(error);
+                    if (editing) {
+                        axiosInstance
+                            .put(url, formData)
+                            .then(res => {
+                                console.log(res.data);
+                                toast.success("Bootcamp edited");
+                                navigate("/manage-bootcamp");
+                            })
+                            .catch(err => {
+                                console.log(err.response);
+
+                                if (typeof err.response?.data === "string") {
+                                    toast.error(err.response.data);
+                                } else {
+                                    Object.keys(err.response?.data).forEach(key => {
+                                        err.response.data[key].forEach(error => {
+                                            toast.error(error);
+                                        })
+                                    })
+                                }
+
+
+                            })
+                    } else {
+                        axiosInstance
+                            .post(url, formData)
+                            .then(res => {
+                                console.log(res.data);
+                                toast.success("Bootcamp created");
+                                navigate("/manage-bootcamp");
+                            })
+                            .catch(err => {
+                                console.log(err.response);
+                                Object.keys(err.response?.data).forEach(key => {
+                                    err.response.data[key].forEach(error => {
+                                        toast.error(error);
+                                    })
                                 })
                             })
-                        })
+                    }
                 }
             })
             .catch(err => {
@@ -106,12 +157,14 @@ const AddBootcamp = () => {
                                             className="form-control"
                                             placeholder="Bootcamp Name"
                                             required
+                                            value={formData.name}
                                             onChange={handleInputChange}
                                         />
                                     </div>
                                     <div className="form-group">
                                         <label>Address</label>
                                         <input
+                                            value={formData.address}
                                             type="text"
                                             name="address"
                                             className="form-control"
@@ -126,6 +179,7 @@ const AddBootcamp = () => {
                                     <div className="form-group">
                                         <label>Phone Number</label>
                                         <input
+                                            value={formData.phone}
                                             type="text"
                                             name="phone"
                                             className="form-control"
@@ -136,6 +190,7 @@ const AddBootcamp = () => {
                                     <div className="form-group">
                                         <label>Email</label>
                                         <input
+                                            value={formData.email}
                                             type="text"
                                             name="email"
                                             className="form-control"
@@ -146,6 +201,7 @@ const AddBootcamp = () => {
                                     <div className="form-group">
                                         <label>Website</label>
                                         <input
+                                            value={formData.website}
                                             type="text"
                                             name="website"
                                             className="form-control"
@@ -163,11 +219,12 @@ const AddBootcamp = () => {
                                     <div className="form-group">
                                         <label>Description</label>
                                         <textarea
+                                            value={formData.description}
                                             name="description"
                                             rows="5"
                                             className="form-control"
                                             placeholder="Description (What you offer, etc)"
-                                            maxlength="500"
+                                            maxLength="500"
                                             onChange={handleInputChange}
                                         ></textarea>
                                         <small className="form-text text-muted"
@@ -176,8 +233,8 @@ const AddBootcamp = () => {
                                     </div>
                                     <div className="form-group">
                                         <label>Careers</label>
-                                        <select onChange={handleSelectChange} name="careers" className="custom-select" multiple>
-                                            <option selected>Select all that apply</option>
+                                        <select onChange={handleSelectChange} defaultValue={bootcamp.careers.map(career => career.name)} name="careers" className="custom-select" multiple>
+                                            <option>Select all that apply</option>
                                             <option value="Web Development">Web Development</option>
                                             <option value="Mobile Development"
                                             >Mobile Development</option
@@ -190,6 +247,7 @@ const AddBootcamp = () => {
                                     </div>
                                     <div className="form-check">
                                         <input
+                                            checked={formData.housing}
                                             className="form-check-input"
                                             type="checkbox"
                                             name="housing"
@@ -202,6 +260,7 @@ const AddBootcamp = () => {
                                     </div>
                                     <div className="form-check">
                                         <input
+                                            checked={formData.job_assistance}
                                             className="form-check-input"
                                             type="checkbox"
                                             name="job_assistance"
@@ -214,6 +273,7 @@ const AddBootcamp = () => {
                                     </div>
                                     <div className="form-check">
                                         <input
+                                            checked={formData.job_guarantee}
                                             className="form-check-input"
                                             type="checkbox"
                                             name="job_guarantee"
@@ -226,6 +286,7 @@ const AddBootcamp = () => {
                                     </div>
                                     <div className="form-check">
                                         <input
+                                            checked={formData.accept_gi}
                                             className="form-check-input"
                                             type="checkbox"
                                             name="accept_gi"
