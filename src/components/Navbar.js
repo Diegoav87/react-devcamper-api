@@ -41,11 +41,8 @@ const Navbar = () => {
                                             Manage Bootcamp
                                         </Link>
                                         <a className="dropdown-item" href="manage-reviews.html"
-                                        >Manage Reviews</a
-                                        >
-                                        <a className="dropdown-item" href="manage-account.html"
-                                        >Manage Account</a
-                                        >
+                                        >Manage Reviews</a>
+                                        <Link className="dropdown-item" to="/">Manage Account</Link>
                                         <div className="dropdown-divider"></div>
                                         <Link to="/logout" className="dropdown-item">
                                             <i className="fas fa-sign-out-alt"></i> Logout

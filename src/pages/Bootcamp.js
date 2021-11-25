@@ -7,23 +7,15 @@ import defaultPic from "../assets/img/default_bootcamp.jpg";
 import axiosInstance from '../helpers/axios';
 import { useParams } from 'react-router';
 
+import { getBootcamp } from '../helpers/bootcamps';
+
 const Bootcamp = () => {
     const { id } = useParams();
     const [bootcamp, setBootcamp] = useState(null);
     const [loading, setLoading] = useState(true);
 
-    const getBootcamp = () => {
-        axiosInstance
-            .get(`bootcamps/get-bootcamp/${id}/`)
-            .then(res => {
-                console.log(res.data);
-                setBootcamp(res.data);
-                setLoading(false);
-            })
-    }
-
     useEffect(() => {
-        getBootcamp();
+        getBootcamp(setBootcamp, setLoading, id);
     }, [])
 
     if (loading) {

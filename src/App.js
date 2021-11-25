@@ -15,6 +15,10 @@ import Bootcamps from './pages/Bootcamps';
 import Bootcamp from './pages/Bootcamp';
 import ManageBootcamp from "./pages/ManageBootcamp";
 import AddBootcamp from "./pages/AddBootcamp";
+import EditBootcamp from "./pages/EditBootcamp";
+import ManageCourses from "./pages/ManageCourses";
+import AddCourse from "./pages/AddCourse";
+import EditCourse from "./pages/EditCourse";
 import Spinner from "./components/Spinner";
 
 import { ToastContainer } from "react-toastify";
@@ -68,6 +72,26 @@ function App() {
         <Route exact path="/add-bootcamp" element={
           <PrivateRoute>
             <AddBootcamp />
+          </PrivateRoute>
+        } />
+        <Route exact path="/edit-bootcamp/:id" element={
+          <PrivateRoute>
+            <EditBootcamp />
+          </PrivateRoute>
+        } />
+        <Route exact path="/manage-courses/:id" element={
+          <PrivateRoute>
+            <ManageCourses />
+          </PrivateRoute>
+        } />
+        <Route exact path="/add-course/:id" element={
+          <PrivateRoute>
+            <AddCourse />
+          </PrivateRoute>
+        } />
+        <Route exact path="/edit-course/:id" element={
+          <PrivateRoute>
+            <EditCourse />
           </PrivateRoute>
         } />
       </Routes>

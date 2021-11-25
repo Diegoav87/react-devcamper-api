@@ -118,11 +118,9 @@ const ManageBootcamp = () => {
                                             </div>
                                             <input onClick={sendPhoto} type="submit" className="btn btn-light btn-block" value="Upload Image" />
                                         </form>
-                                        <Link to="/add-bootcamp" state={{ editing: true, bootcamp: bootcamp }} className="btn btn-primary btn-block"
+                                        <Link to={`/edit-bootcamp/${bootcamp.id}`} className="btn btn-primary btn-block"
                                         >Edit Bootcamp Details</Link>
-                                        <a href="manage-courses.html" className="btn btn-secondary btn-block"
-                                        >Manage Courses</a
-                                        >
+                                        <Link to={`/manage-courses/${bootcamp.id}`} className="btn btn-secondary btn-block">Manage Courses</Link>
                                         <a href="#" data-toggle="modal" data-target="#exampleModal" className="btn btn-danger btn-block">Remove Bootcamp</a>
                                     </React.Fragment>
                                 ) : (
