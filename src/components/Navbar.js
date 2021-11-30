@@ -40,8 +40,7 @@ const Navbar = () => {
                                         <Link to="/manage-bootcamp" className="dropdown-item">
                                             Manage Bootcamp
                                         </Link>
-                                        <a className="dropdown-item" href="manage-reviews.html"
-                                        >Manage Reviews</a>
+                                        <Link to="/manage-reviews" className="dropdown-item" href="manage-reviews.html">Manage Reviews</Link>
                                         <Link className="dropdown-item" to="/">Manage Account</Link>
                                         <div className="dropdown-divider"></div>
                                         <Link to="/logout" className="dropdown-item">

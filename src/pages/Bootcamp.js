@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Navbar from '../components/Navbar';
 import Spinner from '../components/Spinner';
+import { Link } from 'react-router-dom';
 
 import defaultPic from "../assets/img/default_bootcamp.jpg";
 
@@ -66,8 +67,8 @@ const Bootcamp = () => {
 
                             <h1 className="text-center my-4"><span className="badge badge-secondary badge-success rounded-circle p-3">{bootcamp.average_rating}</span> Rating</h1>
 
-                            <a href="reviews.html" className="btn btn-dark btn-block my-3"><i className="fas fa-comments"></i>  Read Reviews</a>
-                            <a href="add-review.html" className="btn btn-light btn-block my-3"><i className="fas fa-pencil-alt"></i>  Write a Review</a>
+                            <Link to={`/reviews/${bootcamp.id}`} className="btn btn-dark btn-block my-3"><i className="fas fa-comments"></i>  Read Reviews</Link>
+                            <Link to={`/add-review/${bootcamp.id}`} className="btn btn-light btn-block my-3"><i className="fas fa-pencil-alt"></i>  Write a Review</Link>
                             <a href={bootcamp.website} rel="noreferrer" target="_blank" className="btn btn-secondary btn-block my-3"><i className="fas fa-globe"></i>  Visit Website</a>
 
                             {/* <div id='map' style={{ width: "100%", height: "300px" }}></div> */}

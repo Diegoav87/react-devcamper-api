@@ -20,12 +20,16 @@ import ManageCourses from "./pages/ManageCourses";
 import AddCourse from "./pages/AddCourse";
 import EditCourse from "./pages/EditCourse";
 import Spinner from "./components/Spinner";
+import Reviews from "./pages/Reviews";
 
 import { ToastContainer } from "react-toastify";
 
 import Logout from "./components/Logout";
 
 import useAuth from "./hooks/useAuth";
+import ManageReviews from "./pages/ManageReviews";
+import AddReview from "./pages/AddReview";
+import EditReview from "./pages/EditReview";
 
 function App() {
   const auth = useAuth();
@@ -92,6 +96,26 @@ function App() {
         <Route exact path="/edit-course/:id" element={
           <PrivateRoute>
             <EditCourse />
+          </PrivateRoute>
+        } />
+        <Route exact path="/manage-reviews" element={
+          <PrivateRoute>
+            <ManageReviews />
+          </PrivateRoute>
+        } />
+        <Route exact path="/add-review/:id" element={
+          <PrivateRoute>
+            <AddReview />
+          </PrivateRoute>
+        } />
+        <Route exact path="/edit-review/:id" element={
+          <PrivateRoute>
+            <EditReview />
+          </PrivateRoute>
+        } />
+        <Route exact path="/reviews/:id" element={
+          <PrivateRoute>
+            <Reviews />
           </PrivateRoute>
         } />
       </Routes>
