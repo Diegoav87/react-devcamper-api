@@ -49,7 +49,13 @@ const Login = () => {
                         })
                         .catch((err) => {
                             console.log(err.response);
-                            toast.error("Invalid credentials");
+
+                            if (err.response.status === 401) {
+                                toast.error("Invalid credentials");
+                            } else {
+                                toast.error("Something went wrong, please try again later")
+                            }
+
                         });
                 }
             })

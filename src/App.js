@@ -30,6 +30,8 @@ import useAuth from "./hooks/useAuth";
 import ManageReviews from "./pages/ManageReviews";
 import AddReview from "./pages/AddReview";
 import EditReview from "./pages/EditReview";
+import ManageAccount from "./pages/ManageAccount";
+import UpdatePassword from "./pages/UpdatePassword";
 
 function App() {
   const auth = useAuth();
@@ -116,6 +118,16 @@ function App() {
         <Route exact path="/reviews/:id" element={
           <PrivateRoute>
             <Reviews />
+          </PrivateRoute>
+        } />
+        <Route exact path="/manage-account" element={
+          <PrivateRoute>
+            <ManageAccount />
+          </PrivateRoute>
+        } />
+        <Route exact path="/update-password" element={
+          <PrivateRoute>
+            <UpdatePassword />
           </PrivateRoute>
         } />
       </Routes>

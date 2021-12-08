@@ -4,6 +4,7 @@ import axiosInstance from '../../helpers/axios';
 import { useNavigate } from 'react-router';
 import { toast } from 'react-toastify';
 import * as yup from "yup";
+import handleError from '../../helpers/axiosErrorHandler';
 
 const BootcampForm = (props) => {
     const navigate = useNavigate();
@@ -82,19 +83,7 @@ const BootcampForm = (props) => {
                                 navigate("/manage-bootcamp");
                             })
                             .catch(err => {
-                                console.log(err.response);
-
-                                if (typeof err.response?.data === "string") {
-                                    toast.error(err.response.data);
-                                } else {
-                                    Object.keys(err.response?.data).forEach(key => {
-                                        err.response.data[key].forEach(error => {
-                                            toast.error(error);
-                                        })
-                                    })
-                                }
-
-
+                                handleError(err);
                             })
                     } else {
                         axiosInstance
@@ -105,12 +94,7 @@ const BootcampForm = (props) => {
                                 navigate("/manage-bootcamp");
                             })
                             .catch(err => {
-                                console.log(err.response);
-                                Object.keys(err.response?.data).forEach(key => {
-                                    err.response.data[key].forEach(error => {
-                                        toast.error(error);
-                                    })
-                                })
+                                handleError(err);
                             })
                     }
                 }

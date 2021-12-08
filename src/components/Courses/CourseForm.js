@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router';
 import * as yup from "yup";
 import axiosInstance from '../../helpers/axios';
 import { toast } from 'react-toastify';
+import handleError from '../../helpers/axiosErrorHandler';
 
 const CourseForm = (props) => {
     const navigate = useNavigate();
@@ -62,19 +63,7 @@ const CourseForm = (props) => {
                                 navigate(`/manage-courses/${props.bootcamp.id}`)
                             })
                             .catch(err => {
-                                console.log(err.response);
-
-                                if (typeof err.response?.data === "string") {
-                                    toast.error(err.response.data);
-                                } else {
-                                    Object.keys(err.response?.data).forEach(key => {
-                                        err.response.data[key].forEach(error => {
-                                            toast.error(error);
-                                        })
-                                    })
-                                }
-
-
+                                handleError(err);
                             })
                     } else {
                         axiosInstance
@@ -85,19 +74,7 @@ const CourseForm = (props) => {
                                 navigate(`/manage-courses/${props.bootcamp.id}`)
                             })
                             .catch(err => {
-                                console.log(err.response);
-
-                                if (typeof err.response?.data === "string") {
-                                    toast.error(err.response.data);
-                                } else {
-                                    Object.keys(err.response?.data).forEach(key => {
-                                        err.response.data[key].forEach(error => {
-                                            toast.error(error);
-                                        })
-                                    })
-                                }
-
-
+                                handleError(err);
                             })
                     }
 

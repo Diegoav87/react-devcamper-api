@@ -72,11 +72,18 @@ const Register = () => {
                         })
                         .catch((err) => {
                             console.log(err.response)
-                            Object.keys(err.response.data.errors).forEach(key => {
-                                err.response.data.errors[key].forEach(error => {
-                                    toast.error(error);
+
+                            if (err.response.status === 400) {
+                                Object.keys(err.response.data.errors).forEach(key => {
+                                    err.response.data.errors[key].forEach(error => {
+                                        toast.error(error);
+                                    })
                                 })
-                            })
+                            } else {
+                                toast.error("Something went wrong, please try again later")
+                            }
+
+
                         });
                 }
             })
