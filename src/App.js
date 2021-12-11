@@ -32,6 +32,8 @@ import AddReview from "./pages/AddReview";
 import EditReview from "./pages/EditReview";
 import ManageAccount from "./pages/ManageAccount";
 import UpdatePassword from "./pages/UpdatePassword";
+import RequestPasswordReset from "./pages/RequestPasswordReset";
+import ResetPasswordConfirm from "./pages/ResetPasswordConfirm";
 
 function App() {
   const auth = useAuth();
@@ -129,6 +131,16 @@ function App() {
           <PrivateRoute>
             <UpdatePassword />
           </PrivateRoute>
+        } />
+        <Route exact path="/reset-password" element={
+          <PublicRoute>
+            <RequestPasswordReset />
+          </PublicRoute>
+        } />
+        <Route exact path="/password/reset/confirm/:uid/:token" element={
+          <PublicRoute>
+            <ResetPasswordConfirm />
+          </PublicRoute>
         } />
       </Routes>
     </div>

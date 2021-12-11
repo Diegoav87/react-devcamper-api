@@ -6,6 +6,8 @@ import { useLocation } from 'react-router';
 
 import useAuth from '../hooks/useAuth';
 
+import { Link } from 'react-router-dom';
+
 import axiosInstance from '../helpers/axios';
 import * as yup from "yup";
 import { toast } from 'react-toastify';
@@ -112,7 +114,7 @@ const Login = () => {
                                             />
                                         </div>
                                     </form>
-                                    <p>	Forgot Password? <a href="reset-password.html">Reset Password</a></p>
+                                    <p>	Forgot Password? <Link to="/reset-password">Reset Password</Link></p>
                                 </div>
                             </div>
                         </div>
