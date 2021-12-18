@@ -42,6 +42,7 @@ const BootcampForm = (props) => {
         name: yup.string().max(255, "Name can not be longer than 255 characters").required("Name is required"),
         email: yup.string().email("Invalid email format").required("Email is required"),
         phone: yup.string().matches(phoneRegExp, "Phone number is not valid"),
+        address: yup.string().required("Address is required"),
         website: yup.string().url("Invalid website URL format"),
         description: yup.string().max(500, "Description can not have more than 500 characters"),
     })

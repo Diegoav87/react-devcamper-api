@@ -153,32 +153,7 @@ const Register = () => {
                                             />
                                         </div>
 
-                                        <div className="card card-body mb-3">
-                                            <h5>User Role</h5>
-                                            <div className="form-check">
-                                                <input
-                                                    className="form-check-input"
-                                                    type="radio"
-                                                    name="role"
-                                                    value="user"
-                                                    checked
-                                                />
-                                                <label className="form-check-label">
-                                                    Regular User (Browse, Write reviews, etc)
-                                                </label>
-                                            </div>
-                                            <div className="form-check">
-                                                <input
-                                                    className="form-check-input"
-                                                    type="radio"
-                                                    name="role"
-                                                    value="publisher"
-                                                />
-                                                <label className="form-check-label">
-                                                    Bootcamp Publisher
-                                                </label>
-                                            </div>
-                                        </div>
+
                                         <p className="text-danger">
                                             * You must be affiliated with the bootcamp in some way in
                                             order to add it to DevCamper.

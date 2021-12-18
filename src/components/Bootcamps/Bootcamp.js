@@ -16,7 +16,7 @@ const Bootcamp = ({ bootcamp }) => {
                     <div className="card-body">
                         <h5 className="card-title"><Link to={`/bootcamps/${bootcamp.id}`}>{bootcamp.name}</Link><span className="float-right badge badge-success">{bootcamp.average_rating}</span>
                         </h5>
-                        <span className="badge badge-dark mb-2">Boston, MA</span>
+                        <span className="badge badge-dark mb-2">{bootcamp.address}</span>
                         <p className="card-text">
                             {bootcamp.careers.map(career => {
                                 return `${career.name}, `
