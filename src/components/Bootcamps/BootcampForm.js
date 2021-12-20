@@ -12,7 +12,7 @@ const BootcampForm = (props) => {
 
     const bootcampData = props.editing ? {
         name: props.bootcamp.name,
-        address: "",
+        address: props.bootcamp.address,
         phone: props.bootcamp.phone,
         email: props.bootcamp.email,
         website: props.bootcamp.website,

@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 
 import defaultPic from "../assets/img/default_bootcamp.jpg";
 
-import axiosInstance from '../helpers/axios';
 import { useParams } from 'react-router';
 
 import { getBootcamp } from '../helpers/bootcamps';
@@ -34,7 +33,6 @@ const Bootcamp = () => {
                             <h1>{bootcamp.name}</h1>
 
                             <p>{bootcamp.description}</p>
-
                             {bootcamp.courses.length > 0 ? (
                                 <React.Fragment>
                                     <p className="lead mb-4">Average Course Cost: <span className="text-primary">${bootcamp.average_cost}</span></p>
@@ -43,7 +41,7 @@ const Bootcamp = () => {
                                             <div className="card mb-3">
                                                 <h5 className="card-header bg-primary text-white">{course.title}</h5>
                                                 <div className="card-body">
-                                                    <h5 className="card-title">Duration: {course.weeks}</h5>
+                                                    <h5 className="card-title">Duration: {course.weeks} weeks</h5>
                                                     <p className="card-text">{course.description}</p>
                                                     <ul className="list-group mb-3">
                                                         <li className="list-group-item">Cost: ${course.tuition} USD</li>
@@ -70,8 +68,6 @@ const Bootcamp = () => {
                             <Link to={`/reviews/${bootcamp.id}`} className="btn btn-dark btn-block my-3"><i className="fas fa-comments"></i>  Read Reviews</Link>
                             <Link to={`/add-review/${bootcamp.id}`} className="btn btn-light btn-block my-3"><i className="fas fa-pencil-alt"></i>  Write a Review</Link>
                             <a href={bootcamp.website} rel="noreferrer" target="_blank" className="btn btn-secondary btn-block my-3"><i className="fas fa-globe"></i>  Visit Website</a>
-
-                            {/* <div id='map' style={{ width: "100%", height: "300px" }}></div> */}
 
                             <ul className="list-group list-group-flush">
                                 <li className="list-group-item">{bootcamp.housing ? (<i className="fas fa-check text-success"></i>) : (<i className="fas fa-times text-danger"></i>)} Housing</li>

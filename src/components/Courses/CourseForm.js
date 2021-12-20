@@ -19,8 +19,8 @@ const CourseForm = (props) => {
     } : {
         title: "",
         weeks: "",
-        tuition: 0,
-        minimum_skill: "",
+        tuition: '',
+        minimum_skill: "Beginner",
         description: "",
         scolarship_available: false
     }
@@ -29,7 +29,7 @@ const CourseForm = (props) => {
 
     const courseFormSchema = yup.object().shape({
         title: yup.string().max(255, "Title can not be longer than 255 characters").required("Title is required"),
-        weeks: yup.string().required("Duration is required"),
+        weeks: yup.number().required("Duration is required"),
         tuition: yup.number().required("Tuition is required"),
         minimum_skill: yup.string().required("Minimum skill is required"),
         description: yup.string().max(500, "Description can not have more than 500 characters"),
@@ -104,7 +104,7 @@ const CourseForm = (props) => {
                 <input
                     onChange={handleInputChange}
                     value={formData.weeks}
-                    type="text"
+                    type="number"
                     name="weeks"
                     placeholder="Duration"
                     className="form-control"

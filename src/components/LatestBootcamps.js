@@ -2,6 +2,7 @@ import React from 'react'
 
 import defaultPic from '../assets/img/default_bootcamp.jpg'
 import { Link } from 'react-router-dom'
+import mediaUrl from '../helpers/mediaUrl'
 
 const LatestBootcamps = (props) => {
     return (
@@ -13,7 +14,7 @@ const LatestBootcamps = (props) => {
                     {props.bootcamps.length > 0 ? props.bootcamps.map(bootcamp => {
                         return (
                             <div className="card">
-                                <img src={bootcamp.photo ? `http://127.0.0.1:8000${bootcamp.photo}` : defaultPic} className="card-img-top" alt="..." />
+                                <img src={bootcamp.photo ? `${mediaUrl}${bootcamp.photo}` : defaultPic} className="card-img-top" alt="..." />
                                 <div className="card-body">
                                     <h5 className="card-title">
                                         <Link to={`/bootcamps/${bootcamp.id}`}

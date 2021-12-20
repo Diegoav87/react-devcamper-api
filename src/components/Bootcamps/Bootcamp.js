@@ -4,13 +4,15 @@ import { Link } from 'react-router-dom'
 
 import defaultPic from "../../assets/img/default_bootcamp.jpg";
 
+import mediaUrl from '../../helpers/mediaUrl';
+
 const Bootcamp = ({ bootcamp }) => {
 
     return (
         <div className="card mb-3">
             <div className="row no-gutters">
                 <div className="col-md-4">
-                    <img src={bootcamp.photo ? `http://127.0.0.1:8000${bootcamp.photo}` : defaultPic} className="card-img" alt="..." />
+                    <img style={{ minHeight: "100%" }} src={bootcamp.photo ? `${mediaUrl}${bootcamp.photo}` : defaultPic} className="card-img" alt="..." />
                 </div>
                 <div className="col-md-8">
                     <div className="card-body">
