@@ -7,6 +7,8 @@ import defaultPic from "../assets/img/default_bootcamp.jpg";
 
 import { useParams } from 'react-router';
 
+import mediaUrl from '../helpers/mediaUrl';
+
 import { getBootcamp } from '../helpers/bootcamps';
 
 const Bootcamp = () => {
@@ -61,7 +63,7 @@ const Bootcamp = () => {
 
                         <div className="col-md-4">
 
-                            <img src={bootcamp.photo ? `http://127.0.0.1:8000${bootcamp.photo}` : defaultPic} className="img-thumbnail" alt="bootcamp-photo" />
+                            <img src={bootcamp.photo ? `${mediaUrl}${bootcamp.photo}` : defaultPic} className="img-thumbnail" alt="bootcamp-photo" />
 
                             <h1 className="text-center my-4"><span className="badge badge-secondary badge-success rounded-circle p-3">{bootcamp.average_rating}</span> Rating</h1>
 

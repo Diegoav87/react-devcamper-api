@@ -17,7 +17,7 @@ const Reviews = () => {
 
     const getReviews = () => {
         axiosInstance
-            .get(`reviews/bootcamp/${id}`)
+            .get(`reviews/bootcamp/${id}/`)
             .then(res => {
                 console.log(res.data);
                 setReviews(res.data);
