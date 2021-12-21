@@ -4,7 +4,7 @@ const baseURL = process.env.NODE_ENV === "production" ? "https://devcamper-djang
 
 const axiosInstance = axios.create({
     baseURL: baseURL,
-    timeout: 5000,
+    timeout: 15000,
     headers: {
         Authorization: localStorage.getItem("access_token")
             ? "JWT " + localStorage.getItem("access_token")
@@ -16,7 +16,7 @@ const axiosInstance = axios.create({
 
 export const fileAxios = axios.create({
     baseURL: baseURL,
-    timeout: 5000,
+    timeout: 15000,
     headers: {
         Authorization: localStorage.getItem("access_token")
             ? "JWT " + localStorage.getItem("access_token")
